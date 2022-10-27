@@ -6,8 +6,8 @@ from qcloud_cos import CosConfig
 from qcloud_cos import CosS3Client
 import sys
 
-secret_id = os.environ.get('TENCENTCLOUD_SECRET_ID') or 'AKID7B6pLg0EIHA3pSxLdDfOwSuHSQBk4CC3'
-secret_key = os.environ.get('TENCENTCLOUD_SECRET_KEY') or 'kKisnW6av45vfDYi7LNDuTpxQwJWXLwL'
+secret_id = os.environ.get('TENCENTCLOUD_SECRET_ID')
+secret_key = os.environ.get('TENCENTCLOUD_SECRET_KEY')
 region = 'ap-guangzhou'
 config = CosConfig(Region=region, SecretId=secret_id, SecretKey=secret_key)
 # 2. 获取客户端对象

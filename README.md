@@ -1,6 +1,8 @@
 # 概述
 `python_ml_docker` 是基于python的机器学习的容器化的一个例子
 
+- `sklearn_example` 是基于python sklearn的示例
+
 # 结构
 结构由python脚本文件、 运行逻辑sh文件、 脚本运行环境Dockerfile构成。
 

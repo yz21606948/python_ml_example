@@ -1,3 +1,8 @@
-From mcr.microsoft.com/azureml/sklearn-0.24.1-ubuntu18.04-py37-cpu-inference:latest
+FROM demisto/sklearn:1.0.0.36478
 
-RUN pip install --upgrade tencentcloud-sdk-python
+RUN apk add build-base
+RUN pip install --upgrade pip
+ENV PIP_ROOT_USER_ACTION=ignore
+
+RUN pip install -i https://mirrors.tencent.com/pypi/simple/ --upgrade tencentcloud-sdk-python
+RUN pip install -U cos-python-sdk-v5

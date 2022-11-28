@@ -19,7 +19,7 @@ SageMaker分为[Processing Job](https://docs.aws.amazon.com/zh_cn/sagemaker/late
 ![image](https://user-images.githubusercontent.com/17400718/204240073-13cc657e-479e-4100-8277-cf83b923bd13.png)
 
 
-### Processing Job
+### 数据预处理
 Processing Job将从S3读取数据，处理完数据后将把数据上传至S3。
 ![image](https://user-images.githubusercontent.com/17400718/204232069-0cf33793-65ee-4be5-8087-af5fd9500d84.png)
 
@@ -67,3 +67,22 @@ script_processor.run(
 `ProcessingOutput`里面的`source`是容器中脚本输出数据的位置，这里是`/opt/ml/processing`，`destination`是容器中输出到S3的位置。（Sagemaker SDK默认将会创建这个bucket，如果这里定义的bucket不存在
 
 `arguments`是定义在`preprocessing.py`中的命令行参数，这里是`python preprocessing --train-test-split-ratio 0.2`
+
+### 训练模型
+我们将创建`SKLearn`实例在training job中运行`train.py`
+```
+sklearn = SKLearn(entry_point="train.py", 
+		  source_dir="code",
+		  framework_version="0.20.0", 
+		  instance_type="ml.m5.xlarge",
+		  role=role)
+sklearn.fit({"train": preprocessed_training_data})
+```
+这里同样需要定义执行training job的机器类型。
+
+**值得注意的是:**`preprocessed_training_data`这个变量是数据在S3中的位置，这里是"3://billy-ml/aws_sklearn_example/output/train_data"。这个位置将默认映射到容器中“/opt/ml/input/data/train”. 所以`train.py`中读取数据应如下：
+```
+training_data_directory = '/opt/ml/input/data/train'
+train_features_data = os.path.join(training_data_directory, "train_features.csv")
+train_labels_data = os.path.join(training_data_directory, "train_labels.csv")
+```

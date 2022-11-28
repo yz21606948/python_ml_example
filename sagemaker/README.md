@@ -12,6 +12,13 @@ pip3 install sagemaker-training
 ## 使用
 SageMaker分为[Processing Job](https://docs.aws.amazon.com/zh_cn/sagemaker/latest/dg/processing-job.html) 和 [Training Job](https://docs.aws.amazon.com/zh_cn/sagemaker/latest/dg/train-model.html). Processing Job 主要负责数据的读取和预处理，Training Job 主要负责模型训练与评估。
 
+**Processing Job:**
+![image](https://user-images.githubusercontent.com/17400718/204239911-14e13579-c85f-4460-b32b-af9ac6911d38.png)
+
+**Training Job**
+![image](https://user-images.githubusercontent.com/17400718/204240073-13cc657e-479e-4100-8277-cf83b923bd13.png)
+
+
 ### Processing Job
 Processing Job将从S3读取数据，处理完数据后将把数据上传至S3。
 ![image](https://user-images.githubusercontent.com/17400718/204232069-0cf33793-65ee-4be5-8087-af5fd9500d84.png)

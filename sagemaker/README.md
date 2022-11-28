@@ -68,6 +68,8 @@ script_processor.run(
 
 `arguments`是定义在`preprocessing.py`中的命令行参数，这里是`python preprocessing --train-test-split-ratio 0.2`
 
+**值得注意的是：** 如果你需要引入其他依赖，你必须要`source_dir`中`requeirements.txt`文件里指定。Sagemaker SDK将在容器中自动安装。
+
 ### 训练模型
 我们将创建`SKLearn`实例在training job中运行`train.py`
 ```
@@ -88,4 +90,32 @@ train_labels_data = os.path.join(training_data_directory, "train_labels.csv")
 ```
 
 ### 模型评估
-`evaluation.py`是模型评估的脚本。我们将使用
+`evaluation.py`是模型评估的脚本。我们将使用原先创建的实例`FrameworkProcessor`在processing job中运行它。
+
+```
+script_processor.run(
+	code = "evaluation.py",
+	source_dir='code',
+	inputs = [
+		ProcessingInput(source=model_data_s3_uri, destination="/opt/ml/processing/model"),
+		ProcessingInput(source=preprocessed_test_data, destination='/opt/ml/processing/test'),
+	],
+	outputs=[ProcessingOutput(output_name="evaluation", source="/opt/ml/processing/evaluation")],
+)
+```
+
+### SageMaker Docker 容器中的目录结构
+```
+/opt/ml
+├── input
+│   ├── config
+│   │   ├── hyperparameters.json
+│   │   └── resourceConfig.json
+│   └── data
+│       └── <channel_name>
+│           └── <input data>
+├── model
+│   └── <model files>
+└── output
+    └── failure
+```

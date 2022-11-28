@@ -1,0 +1,8 @@
+FROM demisto/sklearn:1.0.0.36478
+
+RUN apk add build-base
+RUN pip install --upgrade pip
+ENV PIP_ROOT_USER_ACTION=ignore
+
+RUN pip install -i https://mirrors.tencent.com/pypi/simple/ --upgrade tencentcloud-sdk-python
+RUN pip install -U cos-python-sdk-v5

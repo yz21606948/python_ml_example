@@ -86,3 +86,6 @@ training_data_directory = '/opt/ml/input/data/train'
 train_features_data = os.path.join(training_data_directory, "train_features.csv")
 train_labels_data = os.path.join(training_data_directory, "train_labels.csv")
 ```
+
+### 模型评估
+`evaluation.py`是模型评估的脚本。我们将使用

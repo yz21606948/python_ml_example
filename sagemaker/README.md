@@ -70,6 +70,18 @@ script_processor.run(
 
 **值得注意的是：** 如果你需要引入其他依赖，你必须要`source_dir`中`requeirements.txt`文件里指定。Sagemaker SDK将在容器中自动安装。
 
+##### 并行处理文件
+当我们把`instance_count`设置为大于1时，需要将`s3_data_distribution_type="ShardedByS3Key"`设置到`ProcessingInput`中，才能实现并行处理文件。
+
+![image](https://user-images.githubusercontent.com/17400718/204251724-af8927cf-97ba-4e1b-a261-f0d30b4aa011.png)
+
+这时S3目标目录下的文件将会分成n份，Sagemaker将会平均分配到实例中处理这些文件。 你的脚本可以这样写：
+```
+for file in Path("/opt/ml/processing/input/").rglob('*.parquet'):
+    file_path = str(file)
+    # load file and process it.
+```
+
 ### 训练模型
 我们将创建`SKLearn`实例在training job中运行`train.py`
 ```

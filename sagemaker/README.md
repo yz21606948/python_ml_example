@@ -54,6 +54,9 @@ script_processor.run(
 	arguments=["--train-test-split-ratio", "0.2"],
 )
 ```
+
 `ProcessingInput`里面的`source`是数据在S3中的位置，`destination`是容器中脚本读取数据的位置，这里是`/opt/ml/processing/input`
-`ProcessingOutput`里面的`source`是容器中脚本输出数据的位置，这里是`/opt/ml/processing`，`destination`是容器中输出到S3的位置。（Sagemaker SDK默认将会创建这个bucket，如果这里定义的bucket不存在）
+
+`ProcessingOutput`里面的`source`是容器中脚本输出数据的位置，这里是`/opt/ml/processing`，`destination`是容器中输出到S3的位置。（Sagemaker SDK默认将会创建这个bucket，如果这里定义的bucket不存在
+
 `arguments`是定义在`preprocessing.py`中的命令行参数，这里是`python preprocessing --train-test-split-ratio 0.2`

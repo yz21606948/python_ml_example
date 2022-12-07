@@ -32,7 +32,12 @@ Amazon S3 Intelligent-Tiering (S3 Intelligent-Tiering) 是唯一一个在访问�
 1. 把所有的生命管理规则应用到所有objects.
 2. 勾选“lifecycle rule actions”的对应设置
 
+![image](https://user-images.githubusercontent.com/17400718/206106391-bdaee7f3-a9c7-4311-97d3-39a13b61d6e4.png)
+
+
 这里设置，当对象上传后7天自动移到Intelligent-Tiering。数据过期时间为90天，即90天后过期数据自动清除。（这个可以另外创建一个life management rule 对部分数据进行设置。）
+
+![image](https://user-images.githubusercontent.com/17400718/206106563-34237f8e-4fe5-49d8-8bbc-939fa6cd509e.png)
 
 
 ### 同步数据

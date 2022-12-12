@@ -29,11 +29,16 @@ def upload_parquet(s3path, filepath, mode):
 	print('Start upload {0} to {1} by {2} mode'.format(filepath, s3path, mode))
 	_check_and_create_bucket(client=client, s3path=s3path)
 	df = pd.read_csv(filepath)
+	# Add tag to the dataset
+	tag_set = "bucketType=dataset&category=COVID19&owner=billy"
 	wr.s3.to_parquet(
 		df=df,
 		path=s3path,
 		dataset=True,
-		mode=mode
+		mode=mode,
+		s3_additional_kwargs={
+			'Tagging': tag_set
+		}
 	)
 	print("{0} bucket upload done".format(s3path))
 

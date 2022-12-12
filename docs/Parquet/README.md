@@ -1,4 +1,4 @@
-## Parquet的概念
+## Parquet的概览
 
 Apache Parquet是一种文件格式，旨在支持复杂数据的快速处理。
 AWS 这样称道：**在Amazon S3中，Parquet与文本格式相比，加载速度快2倍，消耗的存储空间少6倍**

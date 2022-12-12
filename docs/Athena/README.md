@@ -33,6 +33,10 @@ awswrangler有三种方法使用Athena查询然后获取到dataframe。具体用
 
 ![image](https://user-images.githubusercontent.com/17400718/206955007-a3fe4f33-b3bf-457f-a6d3-88042c3b7810.png)
 
+脚本将会在AWS Glue创建对应的表，你可以在console上查看表的metadata信息：
+
+![image](https://user-images.githubusercontent.com/17400718/206971753-cbe4fea1-7cb0-46f1-bc69-5690f0bfdf3e.png)
+
 
 **值得注意的是以下能更省费用且提高效率：** 
 

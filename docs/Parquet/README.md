@@ -42,6 +42,9 @@ python S3_parquet_upload.py --s3path s3://billytest/dataset/ --filepath test.csv
 
 运行成功后，可以在Console上看到：
 
+![image](https://user-images.githubusercontent.com/17400718/206954874-99f8b1d0-2f56-464b-82d9-19348d8caabc.png)
+
+
 **值得注意的是：** 脚本可以添加`--mode` 参数。 mode参数只支持“overwrite”, "appending", 一个是覆盖远端文件，一个是追加到远端文件后，默认是overwrite
 
 ## 参考链接

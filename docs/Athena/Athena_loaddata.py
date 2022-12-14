@@ -6,9 +6,11 @@ def main():
 		wr.catalog.create_database("billytest")
 
 	# Chceking/Creating Glue table
-	try:
-		print(wr.catalog.table(database="billytest", table="students"))
-	except Exception as e:
+    if wr.catalog.does_table_exist(database="billytest", table="students"):
+        medadata = wr.catalog.table(database="billytest", table="students")
+        print("Table 'students' medata is as the following:")
+        print(medadata)
+    else:
 		# Creating a Parquet Table
 		path = "s3://billytest/dataset"
 		res = wr.s3.store_parquet_metadata(
@@ -19,12 +21,6 @@ def main():
 			mode="overwrite",
 		)
 		print("Table has been created: {0}".format(res))
-
-	# Cheching Table metadata
-	medadata = wr.catalog.table(database="billytest", table="students")
-	print("Table 'students' medata is as the following:")
-	print(medadata)
-
 	# Reading data
 	print("Table 'students' data is as the following:")
 	df = wr.athena.read_sql_query("SELECT city, name, score FROM students", database="billytest")
